@@ -1,0 +1,29 @@
+{
+    "name": "argob/apigateway",
+    "authors": [
+        {
+            "name": "German Cigala",
+            "email": "cigalagerman@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.1.3",
+        "illuminate/contracts": "~5.4",
+        "illuminate/http": "~5.4",
+        "illuminate/support": "~5.4",
+        "guzzlehttp/guzzle": "^6.3",
+        "league/oauth1-client": "~1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Argob\\APIGateway\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Argob\\APIGateway\\Providers\\APIGatewayServiceProvider"
+            ]
+        }
+    }
+}
