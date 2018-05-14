@@ -4,11 +4,22 @@
 namespace Argob\APIGateway\Responses;
 
 
-interface APIGatewayResponse
+use Psr\Http\Message\ResponseInterface;
+
+/**
+ * Interface APIGatewayResponseInterface
+ * @package Argob\APIGateway\Responses
+ */
+interface APIGatewayResponse extends ResponseInterface
 {
-    public function items();
-    public function metadata();
-    public function setItems(array $items);
-    public function setMetadata(array $metadata);
+    /**
+     * @return array
+     */
+    public function items():array;
+    
+    /**
+     * @return array
+     */
+    public function metadata():array;
     
 }

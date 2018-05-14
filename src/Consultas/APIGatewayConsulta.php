@@ -8,5 +8,5 @@ use Argob\APIGateway\Responses\APIGatewayResponse;
 
 interface APIGatewayConsulta
 {
-    public function consultar(): APIGatewayResponse;
+    public function consultar(array $values = []): APIGatewayResponse;
 }
