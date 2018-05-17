@@ -31,7 +31,7 @@ class APIGatewayServiceProvider extends ServiceProvider
         });
     
         $this->mergeConfigFrom(
-            __DIR__. '/../config/apigateway.php', 'apigateway'
+            __DIR__. '/../../config/apigateway.php', 'apigateway'
         );
         
     }
