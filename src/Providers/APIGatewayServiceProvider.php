@@ -23,12 +23,16 @@ class APIGatewayServiceProvider extends ServiceProvider
         $this->app->bind(JWTAuthenticator::class, function () {
             
             return new JWTAuthenticator(
-                env('API_GATEWAY_USERNAME', null),
-                env('API_GATEWAY_PASSWORD', null),
-                env('API_GATEWAY_HOST', null)
+                $conf['apigatewy']['username'],
+                $conf['apigatewy']['password'],
+                $conf['apigatewy']['host']
             );
             
         });
+    
+        $this->mergeConfigFrom(
+            __DIR__. '/../config/apigateway.php', 'apigateway'
+        );
         
     }
 }
