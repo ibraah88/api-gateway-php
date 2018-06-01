@@ -4,8 +4,9 @@
 namespace Argob\APIGateway\Providers;
 use Argob\APIGateway\Authenticators\APIGatewayAuthenticator;
 use Argob\APIGateway\Authenticators\JWTAuthenticator;
+use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use Illuminate\Support\ServiceProvider;
-use Argob\APIGateway\APIGateway;
 
 
 class APIGatewayServiceProvider extends ServiceProvider
@@ -19,13 +20,16 @@ class APIGatewayServiceProvider extends ServiceProvider
     {
     
         $this->app->singleton(APIGatewayAuthenticator::class, JWTAuthenticator::class);
+    
+        $this->app->bind(ClientInterface::class, Client::class);
         
         $this->app->bind(JWTAuthenticator::class, function () {
             
             return new JWTAuthenticator(
-                config('apigatewy.username'),
-                config('apigatewy.password'),
-                config('apigatewy.host')
+                $app->make(ClientInterface::class),
+                config('apigateway.username'),
+                config('apigateway.password'),
+                config('apigateway.host')
             );
             
         });

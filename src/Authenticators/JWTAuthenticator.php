@@ -2,30 +2,37 @@
 
 
 namespace Argob\APIGateway\Authenticators;
+use GuzzleHttp\ClientInterface;
 use \Illuminate\Support\Facades\Cache;
-use \GuzzleHttp\Client;
 
 class JWTAuthenticator implements APIGatewayAuthenticator
 {
     protected $username;
     protected $password;
     protected $endpoint;
+    protected $client;
     
-    public function __construct($username, $password, $endpoint)
-    {
+    public function __construct(
+        ClientInterface $client,
+        string $username,
+        string $password,
+        string $endpoint
+    ) {
         $this->username = $username;
         $this->password = $password;
         $this->endpoint = $endpoint;
+        $this->client = $client;
     }
     
+    
+    /**
+     * @return Token
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     protected function requestNewToken(): Token
     {
-        $client = new Client([
-            'base_uri' => $this->endpoint(),
-            'timeout'  => 2.0,
-        ]);
         
-        $res = $client->request('POST', '/api/auth/login', [
+        $res = $this->client()->request('POST', '/api/auth/login', [
             
             'form_params' => [
                 'username' => $this->username(),
@@ -74,5 +81,10 @@ class JWTAuthenticator implements APIGatewayAuthenticator
     protected function endpoint()
     {
         return $this->endpoint;
+    }
+    
+    protected function client()
+    {
+        return $this->client;
     }
 }
