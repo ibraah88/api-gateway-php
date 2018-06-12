@@ -32,7 +32,7 @@ class JWTAuthenticator implements APIGatewayAuthenticator
     protected function requestNewToken(): Token
     {
         
-        $res = $this->client()->request('POST', '/api/auth/login', [
+        $res = $this->client()->request('POST', $this->endpoint() . '/api/auth/login', [
             
             'form_params' => [
                 'username' => $this->username(),

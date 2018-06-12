@@ -26,7 +26,7 @@ class APIGatewayServiceProvider extends ServiceProvider
         $this->app->bind(JWTAuthenticator::class, function () {
             
             return new JWTAuthenticator(
-                $app->make(ClientInterface::class),
+                $this->app->make(ClientInterface::class),
                 config('apigateway.username'),
                 config('apigateway.password'),
                 config('apigateway.host')
