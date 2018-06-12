@@ -1,0 +1,1 @@
+# Crea cliente para conectar con API Gateway
